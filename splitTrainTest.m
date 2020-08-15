@@ -7,7 +7,7 @@ function [Train,Test] = splitTrainTest(Names)
     
     p = randperm(81);
     
-    train = p(1:round(81*0.30)); 
+    train = p(1:round(81*0.80)); 
     
     for i=1:numberOfImages
         name = Names{i};
