@@ -1,6 +1,8 @@
 # FRIQA-ActMapFeat
 Full-reference image quality assessment based on convolutional activation maps.
 
+The proposed method was tested on six publicly available image quality assessment databases. It produces the following results.
+
 |                |PLCC      |SROCC     |KROCC     |
 |----------------|----------|----------|----------|
 |KADID-10k       |0.959     |0.957     |0.821     |
