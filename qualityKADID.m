@@ -1,9 +1,9 @@
 clear all
 close all
 
-load KADID_Data2.mat
+load KADID_Data2.mat % This mat file contains the names of images and MOS values
 
-path = 'C:\Users\Public\QualityAssessment\KADID-10k\images';
+path = 'C:\Users\Public\QualityAssessment\KADID-10k\images'; % KADID-10k images (available: http://database.mmsp-kn.de/kadid-10k-database.html )
 
 net    = alexnet;
 Layers = {'conv1', 'conv2', 'conv3', 'conv4', 'conv5'};
