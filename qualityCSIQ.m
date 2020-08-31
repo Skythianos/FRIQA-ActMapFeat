@@ -82,12 +82,3 @@ X = ['Average SROCC after 20 random train-test splits: ', num2str(round(mean(SRO
 disp(X);
 X = ['Average KROCC after 20 random train-test splits: ', num2str(round(mean(KROCC(:)),3))];
 disp(X);
-
-
-A = P';
-B = S';
-C = K';
-group = [ ones(size(A)); 2 * ones(size(B)); 3 * ones(size(C))];
-figure
-boxplot([A; B; C],group)
-set(gca,'XTickLabel',{'PLCC','SROCC','KROCC'})
