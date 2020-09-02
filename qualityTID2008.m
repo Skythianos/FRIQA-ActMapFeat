@@ -3,8 +3,8 @@ close all
 
 load TID2008_Data.mat
 
-pathDistorted = 'C:\Users\Public\QualityAssessment\tid2008\distorted_images';
-pathReference = 'C:\Users\Public\QualityAssessment\tid2008\reference_images';
+pathDistorted = '/home/dvi/Desktop/QualityAssessment/Databases/TID2008/tid2008/distorted_images';
+pathReference = '/home/dvi/Desktop/QualityAssessment/Databases/TID2008/tid2008/reference_images';
 
 net    = alexnet;
 Layers = {'conv1', 'conv2', 'conv3', 'conv4', 'conv5'};
@@ -32,12 +32,19 @@ parfor i=1:numberOfImages
     catch ME
         if( strcmp( ME.identifier, 'MATLAB:imagesci:imread:fileDoesNotExist' ))
             distortedImageName(1) = 'I';
-            distortedImagePath = strcat(pathDistortedImage, filesep, distortedImageName);
+            distortedImagePath = strcat(pathDistorted, filesep, distortedImageName);
             imgDist = imread(distortedImagePath);
         end
     end
     
-    imgRef  = imread(referenceImagePath);
+    try
+        imgRef  = imread(referenceImagePath);
+    catch ME
+        if( strcmp( ME.identifier, 'MATLAB:imagesci:imread:fileDoesNotExist' ))
+            referenceImagePath = strcat(pathReference, filesep, 'i25.bmp');
+            imgRef  = imread(referenceImagePath);
+        end
+    end
     Features(i,:) = getFeatures(imgDist, imgRef, Layers, net);
 end
 
@@ -45,7 +52,7 @@ PLCC = zeros(1,20); SROCC = zeros(1,20); KROCC = zeros(1,20);
 
 parfor i=1:20
     disp(i);
-    [Train, Test] = splitTrainTest(moswithnames);
+    [Train, Test] = splitTrainTest_TID2008(moswithnames);
 
     TrainFeatures = Features(Train,:);
     TestFeatures  = Features(Test,:);
