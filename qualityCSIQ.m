@@ -3,8 +3,31 @@ close all
 
 load CSIQ.mat
 
-pathDist = '/home/dvi/Desktop/QualityAssessment/Databases/CSIQ/dst_imgs/ALL';
+home = pwd;
+pathDist = '/home/dvi/Desktop/QualityAssessment/Databases/CSIQ/dst_imgs';
 pathRef  = '/home/dvi/Desktop/QualityAssessment/Databases/CSIQ/src_imgs';
+
+cd(pathDist);
+if ~exist('ALL', 'dir')
+    mkdir 'ALL'
+    copyfile awgn/* ALL
+    copyfile blur/* ALL
+    copyfile contrast/* ALL
+    copyfile fnoise/* ALL
+    copyfile jpeg/* ALL
+    copyfile jpeg2000/* ALL
+else
+    rmdir('ALL','s')
+    mkdir 'ALL'
+    copyfile awgn/* ALL
+    copyfile blur/* ALL
+    copyfile contrast/* ALL
+    copyfile fnoise/* ALL
+    copyfile jpeg/* ALL
+    copyfile jpeg2000/* ALL
+end
+cd(home)
+pathDist = '/home/domonkos/Desktop/QualityAssessment/Databases/CSIQ/dst_imgs/ALL';
 
 dmos = cell2mat(dmos);
 numberOfImages = size(dmos,1);
