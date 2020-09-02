@@ -27,7 +27,7 @@ else
     copyfile jpeg2000/* ALL
 end
 cd(home)
-pathDist = '/home/domonkos/Desktop/QualityAssessment/Databases/CSIQ/dst_imgs/ALL';
+pathDist = strcat(pathDist, filesep, 'ALL');
 
 dmos = cell2mat(dmos);
 numberOfImages = size(dmos,1);
