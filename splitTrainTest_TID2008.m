@@ -5,7 +5,7 @@ function [Train,Test] = splitTrainTest_TID2008(Names)
     Train = false(numberOfImages,1);
     Test  = false(numberOfImages,1);
     
-    p = randperm(81);
+    p = randperm(25);
     
     train = p(1:round(25*0.80)); 
     
