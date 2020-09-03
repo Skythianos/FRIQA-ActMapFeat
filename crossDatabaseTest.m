@@ -233,7 +233,7 @@ P4 = predict(ModelTrainedVCLFER, FeaturesTID2013);
 PLCC=corr(P4, dmos);
 SROCC=corr(P4, dmos,'Type','Spearman');
 KROCC=corr(P4, dmos,'Type','Kendall');
-disp('Trained on VCL@FER, Tested on VCL@FER');
+disp('Trained on VCL@FER, Tested on TID2013');
 X = ['PLCC: ', num2str(round(PLCC,3))];
 disp(X);
 X = ['SROCC: ', num2str(round(SROCC,3))];
