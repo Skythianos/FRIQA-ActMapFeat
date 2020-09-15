@@ -37,7 +37,13 @@ parfor i=1:numberOfImages
         end
     end
     
-    imgRef  = imread(referenceImagePath);
+    try
+        imgRef  = imread(referenceImagePath);
+    catch ME
+        if( strcmp( ME.identifier, 'MATLAB:imagesci:imread:fileDoesNotExist' ))
+            imgRef = imread(strcat(pathReference, filesep, 'i25.bmp'));  
+        end
+    end
     Features(i,:) = getFeatures(imgDist, imgRef, Layers, net);
 end
 
