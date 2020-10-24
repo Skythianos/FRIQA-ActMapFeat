@@ -1,5 +1,11 @@
 # FRIQA-ActMapFeat
-Full-reference image quality assessment based on convolutional activation maps.
+Full-reference image quality assessment based on convolutional activation maps. If you use this code, please cite the following paper:<br/>
+@article{varga2020combined,<br/>
+  title={A combined full-reference image quality assessment method based on convolutional activation maps},<br/>
+  author={Varga, Domonkos},<br/>
+  journal={arXiv preprint arXiv:2010.09361},<br/>
+  year={2020}<br/>
+}<br/>
 
 The proposed method was tested on six publicly available image quality assessment databases. It produces the following results.
 
