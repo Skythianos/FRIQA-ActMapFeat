@@ -3,8 +3,8 @@ close all
 
 load TID2008_Data.mat
 
-pathDistorted = '/home/dvi/Desktop/QualityAssessment/Databases/TID2008/tid2008/distorted_images';
-pathReference = '/home/dvi/Desktop/QualityAssessment/Databases/TID2008/tid2008/reference_images';
+pathDistorted = '/home/domonkos/Desktop/QualityAssessment/Databases/TID2008/tid2008/distorted_images';
+pathReference = '/home/domonkos/Desktop/QualityAssessment/Databases/TID2008/tid2008/reference_images';
 
 net    = alexnet;
 Layers = {'conv1', 'conv2', 'conv3', 'conv4', 'conv5'};
@@ -48,9 +48,10 @@ parfor i=1:numberOfImages
     Features(i,:) = getFeatures(imgDist, imgRef, Layers, net);
 end
 
-PLCC = zeros(1,20); SROCC = zeros(1,20); KROCC = zeros(1,20);
+PLCC = zeros(1,100); SROCC = zeros(1,100); KROCC = zeros(1,100);
 
-parfor i=1:20
+parfor i=1:100
+    rng(i);
     disp(i);
     [Train, Test] = splitTrainTest_TID2008(moswithnames);
 
@@ -69,9 +70,12 @@ parfor i=1:20
 end
 
 disp('----------------------------------');
-X = ['Average PLCC after 20 random train-test splits: ', num2str(round(mean(PLCC(:)),3))];
+X = ['Average PLCC after 100 random train-test splits: ', num2str(round(mean(PLCC(:)),3))];
 disp(X);
-X = ['Average SROCC after 20 random train-test splits: ', num2str(round(mean(SROCC(:)),3))];
+X = ['Average SROCC after 100 random train-test splits: ', num2str(round(mean(SROCC(:)),3))];
 disp(X);
-X = ['Average KROCC after 20 random train-test splits: ', num2str(round(mean(KROCC(:)),3))];
+X = ['Average KROCC after 100 random train-test splits: ', num2str(round(mean(KROCC(:)),3))];
+
+figure;boxplot([PLCC',SROCC',KROCC'],{'PLCC','SROCC','KROCC'});
+saveas(gcf,'TID2008_Box.png');
 disp(X);

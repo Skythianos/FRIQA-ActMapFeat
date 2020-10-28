@@ -3,7 +3,7 @@ close all
 
 load VCL_FER.mat
 
-path = 'C:\Users\Public\QualityAssessment\VCL_FER\vcl_fer';
+path = '/home/domonkos/Desktop/QualityAssessment/Databases/VCL_FER/vcl_fer';
 
 numberOfImages = size(mos,1);
 
@@ -37,10 +37,11 @@ end
 
 Names=string(Names);
 
-PLCC = zeros(1,20); SROCC = zeros(1,20); KROCC = zeros(1,20);
+PLCC = zeros(1,100); SROCC = zeros(1,100); KROCC = zeros(1,100);
 
-for i=1:20
+for i=1:100
     disp(i);
+    rng(i);
     [Train, Test] = splitTrainTest_VCLFER(Names);
 
     TrainFeatures = Features(Train,:);
@@ -58,9 +59,12 @@ for i=1:20
 end
 
 disp('----------------------------------');
-X = ['Average PLCC after 20 random train-test splits: ', num2str(round(mean(PLCC(:)),3))];
+X = ['Average PLCC after 100 random train-test splits: ', num2str(round(mean(PLCC(:)),3))];
 disp(X);
-X = ['Average SROCC after 20 random train-test splits: ', num2str(round(mean(SROCC(:)),3))];
+X = ['Average SROCC after 100 random train-test splits: ', num2str(round(mean(SROCC(:)),3))];
 disp(X);
-X = ['Average KROCC after 20 random train-test splits: ', num2str(round(mean(KROCC(:)),3))];
+X = ['Average KROCC after 100 random train-test splits: ', num2str(round(mean(KROCC(:)),3))];
 disp(X);
+
+figure;boxplot([PLCC',SROCC',KROCC'],{'PLCC','SROCC','KROCC'});
+saveas(gcf,'VCLFER_Box.png');

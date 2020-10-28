@@ -3,8 +3,8 @@ close all
 
 load TID2013_Data.mat
 
-pathDistorted = 'C:\Users\Public\QualityAssessment\tid2013\distorted_images';
-pathReference = 'C:\Users\Public\QualityAssessment\tid2013\reference_images';
+pathDistorted = '/home/domonkos/Desktop/QualityAssessment/Databases/TID2013/tid2013/distorted_images';
+pathReference = '/home/domonkos/Desktop/QualityAssessment/Databases/TID2013/tid2013/reference_images';
 
 net    = alexnet;
 Layers = {'conv1', 'conv2', 'conv3', 'conv4', 'conv5'};
@@ -32,7 +32,7 @@ parfor i=1:numberOfImages
     catch ME
         if( strcmp( ME.identifier, 'MATLAB:imagesci:imread:fileDoesNotExist' ))
             distortedImageName(1) = 'I';
-            distortedImagePath = strcat(pathDistortedImage, filesep, distortedImageName);
+            distortedImagePath = strcat(pathDistorted, filesep, distortedImageName);
             imgDist = imread(distortedImagePath);
         end
     end
@@ -41,17 +41,19 @@ parfor i=1:numberOfImages
         imgRef  = imread(referenceImagePath);
     catch ME
         if( strcmp( ME.identifier, 'MATLAB:imagesci:imread:fileDoesNotExist' ))
-            imgRef = imread(strcat(pathReference, filesep, 'i25.bmp'));  
+            referenceImagePath = strcat(pathReference, filesep, 'i25.bmp');
+            imgRef  = imread(referenceImagePath);
         end
     end
     Features(i,:) = getFeatures(imgDist, imgRef, Layers, net);
 end
 
-PLCC = zeros(1,20); SROCC = zeros(1,20); KROCC = zeros(1,20);
+PLCC = zeros(1,100); SROCC = zeros(1,100); KROCC = zeros(1,100);
 
-parfor i=1:20
+parfor i=1:100
     disp(i);
-    [Train, Test] = splitTrainTest(moswithnames);
+    rng(i);
+    [Train, Test] = splitTrainTest_TID2013(moswithnames);
 
     TrainFeatures = Features(Train,:);
     TestFeatures  = Features(Test,:);
@@ -68,9 +70,12 @@ parfor i=1:20
 end
 
 disp('----------------------------------');
-X = ['Average PLCC after 20 random train-test splits: ', num2str(round(mean(PLCC(:)),3))];
+X = ['Average PLCC after 100 random train-test splits: ', num2str(round(mean(PLCC(:)),3))];
 disp(X);
-X = ['Average SROCC after 20 random train-test splits: ', num2str(round(mean(SROCC(:)),3))];
+X = ['Average SROCC after 100 random train-test splits: ', num2str(round(mean(SROCC(:)),3))];
 disp(X);
-X = ['Average KROCC after 20 random train-test splits: ', num2str(round(mean(KROCC(:)),3))];
+X = ['Average KROCC after 100 random train-test splits: ', num2str(round(mean(KROCC(:)),3))];
 disp(X);
+
+figure;boxplot([PLCC',SROCC',KROCC'],{'PLCC','SROCC','KROCC'});
+saveas(gcf,'TID2013_Box.png');

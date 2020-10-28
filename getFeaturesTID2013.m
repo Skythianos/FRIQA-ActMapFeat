@@ -36,7 +36,7 @@ function [Features] = getFeaturesTID2013(pathDistorted,pathReference)
             imgRef  = imread(referenceImagePath);
         catch ME
             if( strcmp( ME.identifier, 'MATLAB:imagesci:imread:fileDoesNotExist' ))
-                %disp(referenceImagePath);
+                disp(referenceImagePath);
                 referenceImagePath = strcat(pathReference, filesep, 'i25.bmp');
                 imgRef  = imread(referenceImagePath);
             end

@@ -31,27 +31,27 @@ path = '/home/domonkos/Desktop/QualityAssessment/Databases/kadid10k/images'; % P
 
 disp('MDID Feature Extraction');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-pathDist = '/home/domonkos/Desktop/QualityAssessment/Databases/MDID/distortion_images'; % PATH MDID
-pathRef  = '/home/domonkos/Desktop/QualityAssessment/Databases/MDID/reference_images';  % PATH MDID
+pathDist = '/home/domonkos/Desktop/QualityAssessment/Databases/MDID/distortion_images';
+pathRef  = '/home/domonkos/Desktop/QualityAssessment/Databases/MDID/reference_images';
 [FeaturesMDID] = getFeaturesMDID(pathDist, pathRef);
 
 load CSIQ.mat
-ModelTrainedCSIQ     = getModel(FeaturesCSIQ, cell2mat(dmos)); % Model trained on CSIQ
+ModelTrainedCSIQ     = getModel(FeaturesCSIQ, cell2mat(dmos));
 
 load TID2008_Data.mat
-ModelTrainedTID2008  = getModel(FeaturesTID2008, dmos); % Model trained on TID2008
+ModelTrainedTID2008  = getModel(FeaturesTID2008, dmos);
 
 load TID2013_Data.mat
-ModelTrainedTID2013  = getModel(FeaturesTID2013, dmos); % Model trained on TID2013
+ModelTrainedTID2013  = getModel(FeaturesTID2013, dmos);
 
 load VCL_FER.mat
-ModelTrainedVCLFER   = getModel(FeaturesVCLFER, mos); % Model trained on VCL@FER
+ModelTrainedVCLFER   = getModel(FeaturesVCLFER, mos);
 
 load KADID_Data2.mat
-ModelTrainedKADID10k = getModel(FeaturesKADID10k, dmos); % Model trained on KADID-10k
+ModelTrainedKADID10k = getModel(FeaturesKADID10k, dmos);
 
 load MDID.mat
-ModelMDID = getModel(FeaturesMDID, mos); % Model trained on MDID
+ModelMDID = getModel(FeaturesMDID, mos);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 disp('Cross database testing model trained on KADID-10k');

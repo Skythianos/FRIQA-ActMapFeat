@@ -4,8 +4,8 @@ close all
 load CSIQ.mat
 
 home = pwd;
-pathDist = '/home/dvi/Desktop/QualityAssessment/Databases/CSIQ/dst_imgs';
-pathRef  = '/home/dvi/Desktop/QualityAssessment/Databases/CSIQ/src_imgs';
+pathDist = '/home/domonkos/Desktop/QualityAssessment/Databases/CSIQ/dst_imgs';
+pathRef  = '/home/domonkos/Desktop/QualityAssessment/Databases/CSIQ/src_imgs';
 
 cd(pathDist);
 if ~exist('ALL', 'dir')
@@ -78,10 +78,11 @@ end
 
 Filenames = string(Filenames);
 
-PLCC = zeros(1,20); SROCC = zeros(1,20); KROCC = zeros(1,20);
+PLCC = zeros(1,100); SROCC = zeros(1,100); KROCC = zeros(1,100);
 
-for i=1:20
+for i=1:100
     disp(i);
+    rng(i);
     [Train, Test] = splitTrainTest_CSIQ(Filenames);
 
     TrainFeatures = Features(Train,:);
@@ -93,15 +94,18 @@ for i=1:20
     Mdl = fitrsvm(TrainFeatures, YTrain, 'KernelFunction', 'gaussian', 'KernelScale', 'auto', 'Standardize', true);
     Pred= predict(Mdl,TestFeatures);
     
-    PLCC(i) = corr(Pred, YTest');
+    PLCC(i) = corr(Pred, YTest'); % pearson = (corr(subjective, ypre, 'type','Pearson')) ;
     SROCC(i)= corr(Pred, YTest', 'Type', 'Spearman');
     KROCC(i)= corr(Pred, YTest', 'Type', 'Kendall');
 end
 
 disp('----------------------------------');
-X = ['Average PLCC after 20 random train-test splits: ', num2str(round(mean(PLCC(:)),3))];
+X = ['Average PLCC after 100 random train-test splits: ', num2str(round(mean(PLCC(:)),3))];
 disp(X);
-X = ['Average SROCC after 20 random train-test splits: ', num2str(round(mean(SROCC(:)),3))];
+X = ['Average SROCC after 100 random train-test splits: ', num2str(round(mean(SROCC(:)),3))];
 disp(X);
-X = ['Average KROCC after 20 random train-test splits: ', num2str(round(mean(KROCC(:)),3))];
+X = ['Average KROCC after 100 random train-test splits: ', num2str(round(mean(KROCC(:)),3))];
 disp(X);
+
+figure;boxplot([PLCC',SROCC',KROCC'],{'PLCC','SROCC','KROCC'});
+saveas(gcf,'CSIQ_Box.png');

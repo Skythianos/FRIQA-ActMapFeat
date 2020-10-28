@@ -1,5 +1,5 @@
 function [Train, Test] = splitTrainTest_CSIQ(names)
-
+    
     numberOfImages = size(names,1);
    
     Train = false(numberOfImages,1);
