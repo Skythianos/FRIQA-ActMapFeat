@@ -11,3 +11,12 @@ The proposed method was tested on six publicly available image quality assessmen
 |VCL-FER         |0.957     |0.961     |0.826     |
 |MDID            |0.923     |0.923     |0.765     |
 |CSIQ            |0.968     |0.969     |0.848     |
+
+This repository contains the following MATLAB scripts:<br/>
+1.) qualityCSIQ.m - demo script demonstrating the usage and results of the proposed method on CSIQ database <br/>
+2.) qualityKADID.m - demo script demonstrating the usage and results of the proposed method on KADID-10k database <br/>
+3.) qualityMDID.m - demo script demonstrating the usage and results of the proposed method on MDID database <br/>
+4.) qualityTID2008.m - demo script demonstrating the usage and results of the proposed method on TID2008 database <br/>
+5.) qualityTID2013.m - demo script demonstrating the usage and results of the proposed method on TID2013 database <br/>
+6.) qualityVCLFER.m - demo script demonstrating the usage and results of the proposed method on VCL@FER database <br/>
+7.) crossDatabaseTest.m - cross database test using CSIQ, KADID-10k, MDID, TID2013, TID2008, VCL@FER <br/>
