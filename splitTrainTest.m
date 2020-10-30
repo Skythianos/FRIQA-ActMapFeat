@@ -1,4 +1,8 @@
-function [Train,Test] = splitTrainTest(Names)
+function [Train,Test] = splitTrainTest(Names, d)
+
+    if(nargin<2)
+        d=0.8;
+    end
 
     numberOfImages = size(Names,1);
    
@@ -7,7 +11,7 @@ function [Train,Test] = splitTrainTest(Names)
     
     p = randperm(81);
     
-    train = p(1:round(81*0.80)); 
+    train = p(1:round(81*d)); 
     
     for i=1:numberOfImages
         name = Names{i};

@@ -1,4 +1,9 @@
 function [Features] = getFeaturesCSIQ(pathDist, pathRef)
+    Image = [];
+    dst_type = [];
+    dst_lev = [];
+    Filenames = [];
+
     load CSIQ.mat
 
     home = pwd;

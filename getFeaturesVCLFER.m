@@ -1,4 +1,6 @@
 function [Features] = getFeaturesVCLFER(path)
+    Names = [];
+
     load VCL_FER.mat
 
     numberOfImages = size(mos,1);
@@ -10,7 +12,7 @@ function [Features] = getFeaturesVCLFER(path)
     Scores = zeros(numberOfImages, 1);
     Features = zeros(numberOfImages, 1376);
 
-    for i=1:numberOfImages
+    parfor i=1:numberOfImages
         %if(mod(i,50)==0)
         %    disp(i);
         %end

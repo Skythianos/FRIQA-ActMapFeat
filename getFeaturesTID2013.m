@@ -1,4 +1,6 @@
 function [Features] = getFeaturesTID2013(pathDistorted,pathReference)
+    moswithnames = [];
+
     load TID2013_Data.mat
 
     net    = alexnet;

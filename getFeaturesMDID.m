@@ -1,5 +1,5 @@
 function [Features] = getFeaturesMDID(pathDist, pathRef)
-
+    S = [];
     load MDID.mat
     
     S = dir(fullfile(pathDist, '*.bmp'));

@@ -1,4 +1,7 @@
 function [Features] = getFeaturesKADID10k(path)
+    dist_img = [];
+    ref_img  = [];
+
     load KADID_Data2.mat % This mat file contains the names of images and MOS values
 
     net    = alexnet;
@@ -8,7 +11,7 @@ function [Features] = getFeaturesKADID10k(path)
     Scores = zeros(numberOfImages, 1);
     Features = zeros(numberOfImages, 1376);
 
-    for i=1:numberOfImages
+    parfor i=1:numberOfImages
         %if(mod(i,1000)==0)
         %    disp(i);
         %end
