@@ -20,3 +20,5 @@ This repository contains the following MATLAB scripts:<br/>
 5.) qualityTID2013.m - demo script demonstrating the usage and results of the proposed method on TID2013 database <br/>
 6.) qualityVCLFER.m - demo script demonstrating the usage and results of the proposed method on VCL@FER database <br/>
 7.) crossDatabaseTest.m - cross database test using CSIQ, KADID-10k, MDID, TID2013, TID2008, VCL@FER databases <br/>
+8.) qualityKADID_DistLevels.m - evaluating KADID-10k database with respect to different distortion levels <br/>
+9.) qualityKADID_DistTypes.m - evaluating KADID-10k database with respect to different distortion types <br/>
