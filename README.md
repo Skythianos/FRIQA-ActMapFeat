@@ -7,10 +7,10 @@ The proposed method was tested on six publicly available image quality assessmen
 |----------------|----------|----------|----------|
 |KADID-10k       |0.959     |0.957     |0.819     |
 |TID2013         |0.943     |0.936     |0.780     |
-|TID2008         |0.945     |0.943     |0.798     |
-|VCL-FER         |0.957     |0.961     |0.826     |
-|MDID            |0.923     |0.923     |0.765     |
-|CSIQ            |0.968     |0.969     |0.848     |
+|TID2008         |0.941     |0.937     |0.790     |
+|VCL-FER         |0.960     |0.961     |0.826     |
+|MDID            |0.930     |0.927     |0.769     |
+|CSIQ            |0.971     |0.970     |0.850     |
 
 This repository contains the following MATLAB scripts:<br/>
 1.) qualityCSIQ.m - demo script demonstrating the usage and results of the proposed method on CSIQ database <br/>
