@@ -3,8 +3,8 @@ close all
 
 load MDID.mat
 
-pathDist = '/home/domonkos/Desktop/QualityAssessment/Databases/MDID/distortion_images';
-pathRef  = '/home/domonkos/Desktop/QualityAssessment/Databases/MDID/reference_images';
+pathDist = 'C:\Users\Public\QualityAssessment\MDID\distortion_images';
+pathRef  = 'C:\Users\Public\QualityAssessment\MDID\reference_images';
 
 S = dir(fullfile(pathDist, '*.bmp'));
 
@@ -32,7 +32,7 @@ names = string(cell2mat(struct2cell(struct('name', {S(1:end).name}))));
 
 PLCC = zeros(1,100); SROCC = zeros(1,100); KROCC = zeros(1,100);
 
-for i=1:100
+parfor i=1:100
     disp(i);
     rng(i);
     [Train, Test] = splitTrainTest_MDID(names);
@@ -46,9 +46,10 @@ for i=1:100
     Mdl = fitrsvm(TrainFeatures, YTrain, 'KernelFunction', 'gaussian', 'KernelScale', 'auto', 'Standardize', true);
     Pred= predict(Mdl,TestFeatures);
     
-    PLCC(i) = corr(Pred, YTest');
-    SROCC(i)= corr(Pred, YTest', 'Type', 'Spearman');
-    KROCC(i)= corr(Pred, YTest', 'Type', 'Kendall');
+    eval = metric_evaluation(Pred, YTest);
+    PLCC(i) = eval(1);
+    SROCC(i)= eval(2);
+    KROCC(i)= eval(3);
 end
 
 disp('----------------------------------');

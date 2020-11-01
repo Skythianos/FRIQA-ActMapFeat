@@ -3,7 +3,7 @@ close all
 
 load VCL_FER.mat
 
-path = '/home/domonkos/Desktop/QualityAssessment/Databases/VCL_FER/vcl_fer';
+path = 'C:\Users\Public\QualityAssessment\VCL_FER\vcl_fer';
 
 numberOfImages = size(mos,1);
 
@@ -53,9 +53,10 @@ for i=1:100
     Mdl = fitrsvm(TrainFeatures, YTrain, 'KernelFunction', 'gaussian', 'KernelScale', 'auto', 'Standardize', true);
     Pred= predict(Mdl,TestFeatures);
     
-    PLCC(i) = corr(Pred, YTest');
-    SROCC(i)= corr(Pred, YTest', 'Type', 'Spearman');
-    KROCC(i)= corr(Pred, YTest', 'Type', 'Kendall');
+    eval = metric_evaluation(Pred, YTest');
+    PLCC(i) = eval(1);
+    SROCC(i)= eval(2);
+    KROCC(i)= eval(3);
 end
 
 disp('----------------------------------');

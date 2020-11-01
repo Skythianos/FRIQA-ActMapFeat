@@ -3,7 +3,7 @@ close all
 
 load KADID_Data2.mat % This mat file contains the names of images and MOS values
 
-path = '/home/domonkos/Desktop/QualityAssessment/Databases/kadid10k/images'; % KADID-10k images (available: http://database.mmsp-kn.de/kadid-10k-database.html )
+path = 'C:\Users\Public\QualityAssessment\KADID-10k\images'; % KADID-10k images (available: http://database.mmsp-kn.de/kadid-10k-database.html )
 
 net    = alexnet;
 Layers = {'conv1', 'conv2', 'conv3', 'conv4', 'conv5'};
@@ -37,9 +37,10 @@ parfor i=1:100
     Mdl = fitrsvm(TrainFeatures, YTrain, 'KernelFunction', 'gaussian', 'KernelScale', 'auto', 'Standardize', true);
     Pred= predict(Mdl,TestFeatures);
     
-    PLCC(i) = corr(Pred, YTest);
-    SROCC(i)= corr(Pred, YTest, 'Type', 'Spearman');
-    KROCC(i)= corr(Pred, YTest, 'Type', 'Kendall');
+    eval = metric_evaluation(Pred, YTest);
+    PLCC(i) = eval(1);
+    SROCC(i)= eval(2);
+    KROCC(i)= eval(3);
 end
 
 disp('----------------------------------');

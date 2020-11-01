@@ -45,9 +45,12 @@ for i=1:numSplit
         test = dmos(Levels(:,j));
         selected = searchLevel(test_img, j);
         pred = Pred(selected);
-        Level(j,i,1) = corr(pred , test);
-        Level(j,i,2) = corr(pred , test, 'Type', 'Spearman');
-        Level(j,i,3) = corr(pred , test, 'Type', 'Kendall');
+        
+        eval = metric_evaluation(pred, test);
+        
+        Level(j,i,1) = eval(1);
+        Level(j,i,2) = eval(2);
+        Level(j,i,3) = eval(3);
     end
 end
 

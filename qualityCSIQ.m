@@ -4,8 +4,8 @@ close all
 load CSIQ.mat
 
 home = pwd;
-pathDist = '/home/domonkos/Desktop/QualityAssessment/Databases/CSIQ/dst_imgs';
-pathRef  = '/home/domonkos/Desktop/QualityAssessment/Databases/CSIQ/src_imgs';
+pathDist = 'C:\Users\Public\QualityAssessment\CSIQ\dst_imgs';
+pathRef  = 'C:\Users\Public\QualityAssessment\CSIQ\src_imgs';
 
 cd(pathDist);
 if ~exist('ALL', 'dir')
@@ -80,7 +80,7 @@ Filenames = string(Filenames);
 
 PLCC = zeros(1,100); SROCC = zeros(1,100); KROCC = zeros(1,100);
 
-for i=1:100
+parfor i=1:100
     disp(i);
     rng(i);
     [Train, Test] = splitTrainTest_CSIQ(Filenames);
@@ -94,9 +94,10 @@ for i=1:100
     Mdl = fitrsvm(TrainFeatures, YTrain, 'KernelFunction', 'gaussian', 'KernelScale', 'auto', 'Standardize', true);
     Pred= predict(Mdl,TestFeatures);
     
-    PLCC(i) = corr(Pred, YTest'); % pearson = (corr(subjective, ypre, 'type','Pearson')) ;
-    SROCC(i)= corr(Pred, YTest', 'Type', 'Spearman');
-    KROCC(i)= corr(Pred, YTest', 'Type', 'Kendall');
+    eval = metric_evaluation(Pred, YTest);
+    PLCC(i) = eval(1);
+    SROCC(i)= eval(2);
+    KROCC(i)= eval(3);
 end
 
 disp('----------------------------------');

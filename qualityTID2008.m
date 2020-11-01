@@ -3,8 +3,8 @@ close all
 
 load TID2008_Data.mat
 
-pathDistorted = '/home/domonkos/Desktop/QualityAssessment/Databases/TID2008/tid2008/distorted_images';
-pathReference = '/home/domonkos/Desktop/QualityAssessment/Databases/TID2008/tid2008/reference_images';
+pathDistorted = 'C:\Users\Public\QualityAssessment\tid2008\distorted_images';
+pathReference = 'C:\Users\Public\QualityAssessment\tid2008\reference_images';
 
 net    = alexnet;
 Layers = {'conv1', 'conv2', 'conv3', 'conv4', 'conv5'};
@@ -64,9 +64,10 @@ parfor i=1:100
     Mdl = fitrsvm(TrainFeatures, YTrain, 'KernelFunction', 'gaussian', 'KernelScale', 'auto', 'Standardize', true);
     Pred= predict(Mdl,TestFeatures);
     
-    PLCC(i) = corr(Pred, YTest);
-    SROCC(i)= corr(Pred, YTest, 'Type', 'Spearman');
-    KROCC(i)= corr(Pred, YTest, 'Type', 'Kendall');
+    eval = metric_evaluation(Pred, YTest);
+    PLCC(i) = eval(1);
+    SROCC(i)= eval(2);
+    KROCC(i)= eval(3);
 end
 
 disp('----------------------------------');
