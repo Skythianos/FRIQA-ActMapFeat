@@ -22,3 +22,6 @@ This repository contains the following MATLAB scripts:<br/>
 7.) crossDatabaseTest.m - cross database test using CSIQ, KADID-10k, MDID, TID2013, TID2008, VCL@FER databases <br/>
 8.) qualityKADID_DistLevels.m - evaluating KADID-10k database with respect to different distortion levels <br/>
 9.) qualityKADID_DistTypes.m - evaluating KADID-10k database with respect to different distortion types <br/>
+<br/>
+<br/>
+If you use this code, please cite the following paper: https://www.mdpi.com/1999-4893/13/12/313
