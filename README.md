@@ -28,4 +28,14 @@ This repository contains the following MATLAB scripts:<br/>
 9.) qualityKADID_DistTypes.m - evaluating KADID-10k database with respect to different distortion types <br/>
 <br/>
 <br/>
-If you use this code, please cite the following paper: https://www.mdpi.com/1999-4893/13/12/313
+If you use this code, please cite the following paper: https://www.mdpi.com/1999-4893/13/12/313<br/>
+@article{varga2020combined,<br/>
+  title={A combined full-reference image quality assessment method based on convolutional activation maps},<br/>
+  author={Varga, Domonkos},<br/>
+  journal={Algorithms},<br/>
+  volume={13},<br/>
+  number={12},<br/>
+  pages={313},<br/>
+  year={2020},<br/>
+  publisher={Multidisciplinary Digital Publishing Institute}<br/>
+}<br/>
